@@ -2,293 +2,286 @@
 
 **HybridAgentic AI** is an advanced, autonomous system automation agent designed to act as an intelligent operating system assistant. Built on the **LangChain** framework and powered by **Groq's** high-performance inference engine, this agent bridges the gap between natural language reasoning and low-level system operations.
 
-It is capable of managing files, executing code, controlling version control systems (GitHub), monitoring system health, and interacting with the web—all through a conversational interface with persistent memory.
-
+It is capable of managing files, executing code, controlling version control systems (GitHub), monitoring system health, and interacting with the web — all through a conversational interface with persistent memory.
 
 ---
-
 
 ## 🏗️ Technology Stack
 
 The project relies on a robust set of modern technologies:
 
-*   **Core Framework:** [LangChain](https://www.langchain.com/) (Agents, Tools, RunnableHistory)
-*   **LLM Engine:** [Groq API](https://groq.com/) (Running `openai/gpt-oss-20b` / Llama 3) for ultra-fast inference and tool calling.
-*   **System Interaction:** `os`, `shutil`, `subprocess` (Python Standard Libraries).
-*   **System Monitoring:** `psutil` for real-time CPU, RAM, and process management.
-*   **Network/API:** `requests` for web searching and API calls.
-*   **GitHub Integration:** `PyGithub` for authenticated repository management.
-*   **Memory:** Local JSON storage via `FileChatMessageHistory` to maintain context across sessions.
-
+- **Core Framework:** [LangChain](https://www.langchain.com/) (Agents, Tools, RunnableHistory)
+- **LLM Engine:** [Groq API](https://groq.com/) (Running `openai/gpt-oss-20b` / Llama 3) for ultra-fast inference and tool calling
+- **System Interaction:** `os`, `shutil`, `subprocess` (Python Standard Libraries)
+- **System Monitoring:** `psutil` for CPU, RAM, and process management
+- **Network/API:** `requests` for web searching and API calls
+- **GitHub Integration:** `PyGithub` for repository management
+- **Memory:** Local JSON storage via `FileChatMessageHistory` to maintain context across sessions
 
 ---
 
+# 🚀 Features & Tool Breakdown
 
-## 🚀 Features & Tool Breakdown
- 🧰 Available Tools
+## 🧰 Available Tools
 
-The agent is equipped with multiple tool categories that allow it to interact with the system, execute code, manage files, automate GitHub tasks, and retrieve external information.
+The agent includes multiple tool categories that allow it to interact with the system, execute code, manage files, automate GitHub tasks, and retrieve external information.
 
+---
 
-# 📁 File System Management (`tools/file_tool.py`)
+## 📁 File System Management (`tools/file_tool.py`)
 
 These tools allow the agent to interact directly with the local file system.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **create_folder** | Creates a new directory at the specified path. |
-| **create_empty_file** | Creates a new file with **0 bytes** (empty file). |
-| **create_file_with_content** | Creates a new file and immediately writes provided text content into it. |
-| **read_file** | Reads the contents of a file and returns it to the agent's context for processing. |
-| **write_file** | Overwrites an existing file with new content. |
-| **append_doc** | Appends additional text to the end of an existing file. Useful for logs, notes, or journals. |
-| **rename_file** | Renames a specific file while keeping it in the same location. |
-| **move_file** | Moves a file from a source directory to a destination directory. |
-| **copy_file** | Creates a copy of a file while preserving metadata. |
-| **remove_file** | Permanently deletes a specific file from the system. |
-| **remove_folder** | Recursively deletes a folder along with all its contents. |
-| **list_files** | Lists all files and directories in the current working directory. |
-| **search_file** | Checks if a specific file exists within the directory structure. |
-| **get_file_size** | Returns the file size converted to **GB**. |
-| **summarize_project** | Lists the first **30 files** in a directory to provide a quick project overview. |
-| **create_zip_folder** | Compresses a folder into a `.zip` archive. |
-
+| **create_folder** | Creates a new directory at the specified path |
+| **create_empty_file** | Creates a new file with **0 bytes** |
+| **create_file_with_content** | Creates a file and writes content immediately |
+| **read_file** | Reads file contents and returns it to the agent context |
+| **write_file** | Overwrites an existing file with new content |
+| **append_doc** | Appends text to the end of an existing file |
+| **rename_file** | Renames a file |
+| **move_file** | Moves a file to another directory |
+| **copy_file** | Copies a file to a new location |
+| **remove_file** | Permanently deletes a file |
+| **remove_folder** | Recursively deletes a folder |
+| **list_files** | Lists files and directories in a path |
+| **search_file** | Checks if a file exists |
+| **get_file_size** | Returns file size in **GB** |
+| **summarize_project** | Lists first **30 files** to give project overview |
+| **create_zip_folder** | Compresses a folder into `.zip` |
 
 ---
 
+## 💻 Coding & Shell Execution (`tools/coding_shell_tools.py`)
 
-# 💻 Coding & Shell Execution (`tools/coding_shell_tools.py`)
-
-Developer-focused tools for automating coding workflows and executing scripts.
+Developer-focused tools for automating coding workflows.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **run_python_script** | Executes a `.py` file using the system’s Python interpreter. |
-| **run_js_script** | Executes a `.js` file using **Node.js**. |
-| **install_python_packages** | Installs Python dependencies using `pip install <package>`. |
-| **install_node_packages** | Installs Node.js dependencies using `npm install <package>`. |
-| **execute_terminal_command** | ⚠️ **High Power Tool** — Executes arbitrary shell commands and captures the output. |
-| **print_project_hierarchy** | Uses the `tree` command to display a visual representation of the project folder structure. |
-| **search_web** | Queries the DuckDuckGo API to retrieve real-time web information. |
-
+| **run_python_script** | Executes a `.py` file |
+| **run_js_script** | Executes a `.js` file using Node.js |
+| **install_python_packages** | Installs dependencies using `pip install` |
+| **install_node_packages** | Installs Node packages using `npm install` |
+| **execute_terminal_command** | ⚠️ Executes arbitrary shell commands |
+| **print_project_hierarchy** | Displays folder structure using `tree` |
+| **search_web** | Queries DuckDuckGo API for information |
 
 ---
 
+## 🐙 GitHub Automation (`tools/github_tools.py`)
 
-# 🐙 GitHub Automation (Authenticated) (`tools/github_tools.py`)
-
-These tools require a **GitHub Personal Access Token** and allow the agent to manage repositories.
+These tools require a **GitHub Personal Access Token**.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **create_github_repo** | Creates a new repository (public or private) in the authenticated GitHub account. |
-| **delete_github_repo** | ⚠️ **Destructive Action** — Permanently deletes a repository by name. |
-| **list_github_repos** | Lists all repositories associated with the authenticated user. |
-| **create_github_file** | Creates a new file inside a specific GitHub repository. |
-| **delete_github_file** | Removes a file from a remote GitHub repository. |
-| **add_folder_to_github** | Adds a folder structure to a repository (via `.gitkeep` or direct file creation). |
-
+| **create_github_repo** | Creates a new repository |
+| **delete_github_repo** | ⚠️ Permanently deletes a repository |
+| **list_github_repos** | Lists repositories for the user |
+| **create_github_file** | Creates a file in a repository |
+| **delete_github_file** | Removes a file from a repository |
+| **add_folder_to_github** | Adds folder structure to repo |
 
 ---
 
+## 🌐 GitHub Data & Media (`tools/general_github_api_tools.py`)
 
-# 🌐 GitHub Data & Media (`tools/general_github_api_tools.py`)
-
-Public API tools used for exploring repositories and retrieving GitHub data.
+Public API tools for exploring GitHub.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **search_github** | Searches public GitHub repositories based on keywords. |
-| **get_repo_readme** | Fetches and decodes the `README.md` of any public repository. |
-| **list_repo_files** | Lists the root file structure of any public repository. |
-| **download_github_repo** | Downloads a repository as a ZIP file and extracts it locally. |
-| **download_random_image** | Downloads a random image from **Lorem Picsum** and saves it locally. |
-
+| **search_github** | Searches public repositories |
+| **get_repo_readme** | Fetches repository README |
+| **list_repo_files** | Lists repository files |
+| **download_github_repo** | Downloads repository as ZIP |
+| **download_random_image** | Downloads random image |
 
 ---
 
+## 🖥️ System Monitoring (`tools/System_tools.py`)
 
-# 🖥️ System Monitoring (`tools/System_tools.py`)
-
-Tools that allow the agent to monitor system health and machine information.
+Tools to monitor system health.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **get_cpu_RAM_usage** | Returns the current CPU usage percentage and RAM statistics (Total, Used, Free). |
-| **get_os_info** | Retrieves operating system details such as System, Node Name, Version, and Machine type. |
-| **list_processes** | Lists the top **20 currently running processes** on the machine. |
-
+| **get_cpu_RAM_usage** | Returns CPU % and RAM stats |
+| **get_os_info** | Returns OS information |
+| **list_processes** | Lists top 20 running processes |
 
 ---
 
-
-# ☁️ General Utilities (`tools/general_tools.py`)
-
-Lightweight tools for retrieving common system and internet information.
+## ☁️ General Utilities (`tools/general_tools.py`)
 
 | Tool Name | Description |
 | :--- | :--- |
-| **get_current_time** | Returns the current local system time. |
-| **get_weather** | Fetches the current weather information for a city using `wttr.in`. |
+| **get_current_time** | Returns local system time |
+| **get_weather** | Fetches weather using `wttr.in` |
+
 ---
 
+# 🛠️ Installation & Setup
 
-## 🛠️ Installation & Setup
-
-### 1️⃣ Clone the Repository
-
-First, download the project from GitHub:
+## 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/HybridAgenticAI.git
 cd HybridAgenticAI
 ```
 
+---
 
-
-
-## 2. Install Python Dependencies
+## 2️⃣ Install Dependencies
 
 ```bash
 pip install langchain langchain-groq langchain-community python-dotenv requests psutil PyGithub
 ```
 
-**Note:** You must have **Node.js installed** to use `run_js_script` and `npm` tools.
-
+**Note:** Node.js must be installed for `run_js_script` and `npm` tools.
 
 ---
 
+## 3️⃣ Environment Configuration
 
-## 3. Environment Configuration
-
-Create a `.env` file in the root directory:
+Create `.env` in the root directory:
 
 ```ini
 GROQ_API_KEY=gsk_your_groq_api_key_here
 GITHUB_TOKEN=ghp_your_github_token_here
 ```
 
-
 ---
 
+## 4️⃣ GitHub Token Setup
 
-## 4. GitHub Token Setup (Important)
-
-1. Go to **GitHub Settings → Developer Settings → Personal Access Tokens (Classic)**  
-2. Generate a new token  
-3. Give the following permissions:
-   - `repo` (Full control)
+1. Go to **GitHub Settings → Developer Settings → Personal Access Tokens**
+2. Generate a new token
+3. Enable:
+   - `repo`
    - `delete_repo`
 
-Update `tools/github_tools.py` to load the token from `.env`, or paste the token directly (not recommended for shared code).
-
+Update `tools/github_tools.py` to load the token from `.env`.
 
 ---
-
 
 # ▶️ Usage
 
-Start the agent by running the main entry point:
+Start the agent:
 
 ```bash
 python main.py
 ```
 
----
 
-
-# Interaction Examples
-
-## Scenario 1: Web Development Setup
-
-**You:**
-> "Create a folder called `MyWebsite`. Inside it, create an `index.html` with basic HTML content and a `style.css` file."
-
-**AI:**
-- Calls `create_folder`
-- Calls `create_file_with_content` twice
-
-Result:
-> Created folder and files successfully.
 
 ---
 
+## 🧠 Architecture Overview
 
+HybridAgentic AI follows a modular agent architecture built on LangChain.
 
-## Scenario 2: System Diagnostics
+User Input
+   ↓
+LLM Reasoning (Groq)
+   ↓
+Tool Selection (LangChain Agent)
+   ↓
+Tool Execution
+   ↓
+Result Returned to User
+   ↓
+Memory Stored (JSON Chat History)
 
-**You:**
-> "My computer feels slow. Check the CPU usage and list the running processes."
+### Key Components
 
-**AI:**
-- Calls `get_cpu_RAM_usage`
-- Calls `list_processes`
+- **LLM Layer**
+  - Groq-powered LLM performs reasoning and decides which tool to call.
 
-Result:
-> CPU is at 85%. Here are the top processes...
+- **Tool Layer**
+  - Modular Python tools perform system actions.
+
+- **Memory Layer**
+  - Conversation history stored using `FileChatMessageHistory`.
+
+- **Execution Layer**
+  - Shell commands, file operations, and API calls.
+
+  
+---
+
+# 💬 Interaction Examples
+
+### Web Development Setup
+
+**User**
+
+> Create a folder called `MyWebsite` with `index.html` and `style.css`
+
+**Agent Actions**
+
+- `create_folder`
+- `create_file_with_content`
 
 ---
 
+### System Diagnostics
 
+**User**
 
-## Scenario 3: GitHub Management
+> My computer feels slow. Check CPU and running processes.
 
-**You:**
-> "Create a private repository called `agent-backup`. Zip my current project folder and upload it there."
+**Agent Actions**
 
-**AI:**
-- Calls `create_github_repo`
-- Calls `create_zip_folder`
-- Uploads the project or notifies if Git CLI is required
+- `get_cpu_RAM_usage`
+- `list_processes`
 
 ---
 
+### GitHub Management
 
+**User**
+
+> Create a private repo `agent-backup` and upload project
+
+**Agent Actions**
+
+- `create_github_repo`
+- `create_zip_folder`
+
+---
 
 # 📂 Project Structure
 
 ```text
 HybridAgenticAI/
 │
-├── main.py                       # Main agent loop and memory handling
-├── tools_registry.py             # Aggregates all tool lists
+├── main.py
+├── tools_registry.py
 │
-├── tools/                        # Modular tool definitions
-│   ├── file_tool.py              # Local file operations
-│   ├── coding_shell_tools.py     # Code execution & Shell
-│   ├── System_tools.py           # OS monitoring
-│   ├── general_tools.py          # Time & Weather
-│   ├── github_tools.py           # Authenticated GitHub actions
-│   └── general_github_api_tools.py # Public GitHub data
+├── tools/
+│   ├── file_tool.py
+│   ├── coding_shell_tools.py
+│   ├── System_tools.py
+│   ├── general_tools.py
+│   ├── github_tools.py
+│   └── general_github_api_tools.py
 │
-├── memory/                       # Stores user session JSONs
-└── .env                          # API Keys
+├── memory/
+└── .env
 ```
 
 ---
 
-
-
 # ⚠️ Security Warning
 
-**Use with Caution**
+This agent allows **arbitrary code execution and file system modification**.
 
-This agent allows **Arbitrary Code Execution and File System Modification.**
+- Shell access via `execute_terminal_command`
+- Ability to delete files and repositories
 
-- **Shell Access:**  
-  The `execute_terminal_command` tool gives the AI full shell access.
-
-- **Deletion:**  
-  The agent can delete files and GitHub repositories permanently.
-
-- **Sandboxing Recommended:**  
-  Run this agent inside a **Virtual Machine**, **Docker container**, or a **restricted environment**.
+⚠️ **Run inside a VM, Docker container, or restricted environment.**
 
 ---
-
-
 
 # 👤 Author
 
 Created by **Sujit Sadalage**
-
