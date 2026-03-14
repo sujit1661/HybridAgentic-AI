@@ -100,56 +100,105 @@ Tools for checking the health of the machine running the agent.
 ---
 
 ## 🛠️ Installation & Setup
+## 1. Install Python Dependencies
 
-### 1. Clone Repository
+Run the following command to install all required Python packages:
+
 ```bash
-git clone https://github.com/yourusername/HybridAgenticAI.git
-cd HybridAgenticAI
-2. Install Python Dependencies
-Bash
-
 pip install langchain langchain-groq langchain-community python-dotenv requests psutil PyGithub
-Note: You must have Node.js installed to use run_js_script and npm tools.
+```
 
-3. Environment Configuration
-Create a .env file in the root directory:
+**Note:**  
+You must have **Node.js installed** to use the `run_js_script` and `npm` tools.
 
-ini
+## 2. Install Python Dependencies
 
+```bash
+pip install langchain langchain-groq langchain-community python-dotenv requests psutil PyGithub
+```
+
+**Note:** You must have **Node.js installed** to use `run_js_script` and `npm` tools.
+
+---
+
+## 3. Environment Configuration
+
+Create a `.env` file in the root directory:
+
+```ini
 GROQ_API_KEY=gsk_your_groq_api_key_here
 GITHUB_TOKEN=ghp_your_github_token_here
-4. GitHub Token Setup (Important)
-Go to GitHub Settings -> Developer Settings -> Personal Access Tokens (Classic).
-Generate a new token with repo (full control) and delete_repo scopes.
-Update tools/github_tools.py to load from .env or paste the token directly (not recommended for shared code).
-▶️ Usage
+```
+
+---
+
+## 4. GitHub Token Setup (Important)
+
+1. Go to **GitHub Settings → Developer Settings → Personal Access Tokens (Classic)**  
+2. Generate a new token  
+3. Give the following permissions:
+   - `repo` (Full control)
+   - `delete_repo`
+
+Update `tools/github_tools.py` to load the token from `.env`, or paste the token directly (not recommended for shared code).
+
+---
+
+# ▶️ Usage
+
 Start the agent by running the main entry point:
 
-Bash
-
+```bash
 python main.py
-Interaction Examples
-Scenario 1: Web Development Setup
+```
 
-You: "Create a folder called 'MyWebsite'. Inside it, create an 'index.html' with basic HTML content and a 'style.css' file."
+---
 
-AI: Calls create_folder, then create_file_with_content twice. "Created folder and files successfully."
+# Interaction Examples
 
-Scenario 2: System Diagnostics
+## Scenario 1: Web Development Setup
 
-You: "My computer feels slow. Check the CPU usage and list the running processes."
+**You:**
+> "Create a folder called `MyWebsite`. Inside it, create an `index.html` with basic HTML content and a `style.css` file."
 
-AI: Calls get_cpu_RAM_usage and list_processes. "CPU is at 85%. Here are the top processes..."
+**AI:**
+- Calls `create_folder`
+- Calls `create_file_with_content` twice
 
-Scenario 3: GitHub Management
+Result:
+> Created folder and files successfully.
 
-You: "Create a private repository called 'agent-backup'. Zip my current project folder and upload it there."
+---
 
-AI: Calls create_github_repo, create_zip_folder, then logic to upload (or notifies if upload requires git command line).
+## Scenario 2: System Diagnostics
 
-📂 Project Structure
-text
+**You:**
+> "My computer feels slow. Check the CPU usage and list the running processes."
 
+**AI:**
+- Calls `get_cpu_RAM_usage`
+- Calls `list_processes`
+
+Result:
+> CPU is at 85%. Here are the top processes...
+
+---
+
+## Scenario 3: GitHub Management
+
+**You:**
+> "Create a private repository called `agent-backup`. Zip my current project folder and upload it there."
+
+**AI:**
+- Calls `create_github_repo`
+- Calls `create_zip_folder`
+- Uploads the project or notifies if Git CLI is required
+
+---
+
+# 📂 Project Structure
+
+```text
 HybridAgenticAI/
 │
 ├── main.py                       # Main agent loop and memory handling
@@ -165,11 +214,31 @@ HybridAgenticAI/
 │
 ├── memory/                       # Stores user session JSONs
 └── .env                          # API Keys
-⚠️ Security Warning
-Use with Caution: This agent allows Arbitrary Code Execution and File System Modification.
+```
 
-Shell Access: The execute_terminal_command tool gives the AI full shell access.
-Deletion: The agent can delete files and GitHub repositories permanently.
-Sandboxing: It is recommended to run this agent in a virtual machine, Docker container, or a restricted environment.
-👤 Author
-Created by Sujit Sadalage
+---
+
+# ⚠️ Security Warning
+
+**Use with Caution**
+
+This agent allows **Arbitrary Code Execution and File System Modification.**
+
+- **Shell Access:**  
+  The `execute_terminal_command` tool gives the AI full shell access.
+
+- **Deletion:**  
+  The agent can delete files and GitHub repositories permanently.
+
+- **Sandboxing Recommended:**  
+  Run this agent inside a **Virtual Machine**, **Docker container**, or a **restricted environment**.
+
+---
+
+# 👤 Author
+
+Created by **Sujit Sadalage**
+
+```bash
+pip install langchain langchain-groq langchain-community python-dotenv requests psutil PyGithub
+=
