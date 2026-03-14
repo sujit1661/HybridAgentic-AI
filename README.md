@@ -4,7 +4,9 @@
 
 It is capable of managing files, executing code, controlling version control systems (GitHub), monitoring system health, and interacting with the web—all through a conversational interface with persistent memory.
 
+
 ---
+
 
 ## 🏗️ Technology Stack
 
@@ -18,10 +20,12 @@ The project relies on a robust set of modern technologies:
 *   **GitHub Integration:** `PyGithub` for authenticated repository management.
 *   **Memory:** Local JSON storage via `FileChatMessageHistory` to maintain context across sessions.
 
+
 ---
 
+
 ## 🚀 Features & Tool Breakdown
-# 🧰 Available Tools
+ 🧰 Available Tools
 
 The agent is equipped with multiple tool categories that allow it to interact with the system, execute code, manage files, automate GitHub tasks, and retrieve external information.
 
@@ -49,7 +53,9 @@ These tools allow the agent to interact directly with the local file system.
 | **summarize_project** | Lists the first **30 files** in a directory to provide a quick project overview. |
 | **create_zip_folder** | Compresses a folder into a `.zip` archive. |
 
+
 ---
+
 
 # 💻 Coding & Shell Execution (`tools/coding_shell_tools.py`)
 
@@ -65,7 +71,9 @@ Developer-focused tools for automating coding workflows and executing scripts.
 | **print_project_hierarchy** | Uses the `tree` command to display a visual representation of the project folder structure. |
 | **search_web** | Queries the DuckDuckGo API to retrieve real-time web information. |
 
+
 ---
+
 
 # 🐙 GitHub Automation (Authenticated) (`tools/github_tools.py`)
 
@@ -80,7 +88,9 @@ These tools require a **GitHub Personal Access Token** and allow the agent to ma
 | **delete_github_file** | Removes a file from a remote GitHub repository. |
 | **add_folder_to_github** | Adds a folder structure to a repository (via `.gitkeep` or direct file creation). |
 
+
 ---
+
 
 # 🌐 GitHub Data & Media (`tools/general_github_api_tools.py`)
 
@@ -94,7 +104,9 @@ Public API tools used for exploring repositories and retrieving GitHub data.
 | **download_github_repo** | Downloads a repository as a ZIP file and extracts it locally. |
 | **download_random_image** | Downloads a random image from **Lorem Picsum** and saves it locally. |
 
+
 ---
+
 
 # 🖥️ System Monitoring (`tools/System_tools.py`)
 
@@ -106,7 +118,9 @@ Tools that allow the agent to monitor system health and machine information.
 | **get_os_info** | Retrieves operating system details such as System, Node Name, Version, and Machine type. |
 | **list_processes** | Lists the top **20 currently running processes** on the machine. |
 
+
 ---
+
 
 # ☁️ General Utilities (`tools/general_tools.py`)
 
@@ -117,6 +131,7 @@ Lightweight tools for retrieving common system and internet information.
 | **get_current_time** | Returns the current local system time. |
 | **get_weather** | Fetches the current weather information for a city using `wttr.in`. |
 ---
+
 
 ## 🛠️ Installation & Setup
 
@@ -129,8 +144,8 @@ git clone https://github.com/your-username/HybridAgenticAI.git
 cd HybridAgenticAI
 ```
 
-**Note:**  
-You must have **Node.js installed** to use the `run_js_script` and `npm` tools.
+
+
 
 ## 2. Install Python Dependencies
 
@@ -140,7 +155,9 @@ pip install langchain langchain-groq langchain-community python-dotenv requests 
 
 **Note:** You must have **Node.js installed** to use `run_js_script` and `npm` tools.
 
+
 ---
+
 
 ## 3. Environment Configuration
 
@@ -151,7 +168,9 @@ GROQ_API_KEY=gsk_your_groq_api_key_here
 GITHUB_TOKEN=ghp_your_github_token_here
 ```
 
+
 ---
+
 
 ## 4. GitHub Token Setup (Important)
 
@@ -163,7 +182,9 @@ GITHUB_TOKEN=ghp_your_github_token_here
 
 Update `tools/github_tools.py` to load the token from `.env`, or paste the token directly (not recommended for shared code).
 
+
 ---
+
 
 # ▶️ Usage
 
@@ -174,6 +195,7 @@ python main.py
 ```
 
 ---
+
 
 # Interaction Examples
 
@@ -191,6 +213,8 @@ Result:
 
 ---
 
+
+
 ## Scenario 2: System Diagnostics
 
 **You:**
@@ -205,6 +229,8 @@ Result:
 
 ---
 
+
+
 ## Scenario 3: GitHub Management
 
 **You:**
@@ -216,6 +242,8 @@ Result:
 - Uploads the project or notifies if Git CLI is required
 
 ---
+
+
 
 # 📂 Project Structure
 
@@ -239,6 +267,8 @@ HybridAgenticAI/
 
 ---
 
+
+
 # ⚠️ Security Warning
 
 **Use with Caution**
@@ -255,6 +285,8 @@ This agent allows **Arbitrary Code Execution and File System Modification.**
   Run this agent inside a **Virtual Machine**, **Docker container**, or a **restricted environment**.
 
 ---
+
+
 
 # 👤 Author
 
