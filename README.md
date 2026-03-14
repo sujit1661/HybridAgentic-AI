@@ -269,6 +269,26 @@ HybridAgenticAI/
 └── .env
 ```
 
+
+
+
+---
+
+## 6️⃣ Future Improvements
+Shows roadmap.
+
+```markdown
+## 🚧 Future Improvements
+
+Planned enhancements:
+
+- Docker sandbox execution
+- GUI dashboard
+- Vector database memory
+- Multi-agent collaboration
+- Automatic debugging agent
+
+---
 ---
 
 # ⚠️ Security Warning
