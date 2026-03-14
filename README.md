@@ -119,12 +119,14 @@ Lightweight tools for retrieving common system and internet information.
 ---
 
 ## 🛠️ Installation & Setup
-## 1. Install Python Dependencies
 
-Run the following command to install all required Python packages:
+### 1️⃣ Clone the Repository
+
+First, download the project from GitHub:
 
 ```bash
-pip install langchain langchain-groq langchain-community python-dotenv requests psutil PyGithub
+git clone https://github.com/your-username/HybridAgenticAI.git
+cd HybridAgenticAI
 ```
 
 **Note:**  
