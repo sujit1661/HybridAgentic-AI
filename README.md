@@ -181,14 +181,19 @@ HybridAgentic AI follows a modular agent architecture built on LangChain.
 
 User Input
    ↓
+   
 LLM Reasoning (Groq)
    ↓
+   
 Tool Selection (LangChain Agent)
    ↓
+   
 Tool Execution
    ↓
+   
 Result Returned to User
    ↓
+   
 Memory Stored (JSON Chat History)
 
 ### Key Components
