@@ -25,7 +25,6 @@ The project relies on a robust set of modern technologies:
 
 The agent is equipped with multiple tool categories that allow it to interact with the system, execute code, manage files, automate GitHub tasks, and retrieve external information.
 
----
 
 # 📁 File System Management (`tools/file_tool.py`)
 
