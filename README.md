@@ -21,82 +21,102 @@ The project relies on a robust set of modern technologies:
 ---
 
 ## 🚀 Features & Tool Breakdown
+# 🧰 Available Tools
 
-HybridAgentic AI is equipped with a modular tool registry. Below is a detailed description of every capability available to the agent.
+The agent is equipped with multiple tool categories that allow it to interact with the system, execute code, manage files, automate GitHub tasks, and retrieve external information.
 
-### 📂 File System Operations (`tools/file_tool.py`)
-These tools allow the agent to manipulate the local file system extensively.
+---
+
+# 📁 File System Management (`tools/file_tool.py`)
+
+These tools allow the agent to interact directly with the local file system.
 
 | Tool Name | Description |
 | :--- | :--- |
 | **create_folder** | Creates a new directory at the specified path. |
-| **create_empty_file** | Creates a new file (0 bytes). |
-| **create_file_with_content** | Creates a file and immediately writes text content to it. |
-| **read_file** | Reads the contents of a file and returns it to the agent context. |
+| **create_empty_file** | Creates a new file with **0 bytes** (empty file). |
+| **create_file_with_content** | Creates a new file and immediately writes provided text content into it. |
+| **read_file** | Reads the contents of a file and returns it to the agent's context for processing. |
 | **write_file** | Overwrites an existing file with new content. |
-| **append_doc** | Appends text to the end of an existing file (useful for logs/journals). |
-| **rename_file** | Renames a specific file. |
-| **move_file** | Moves a file from a source folder to a destination folder. |
-| **copy_file** | Copies a file (preserving metadata) to a new location. |
-| **remove_file** | Permanently deletes a specific file. |
-| **remove_folder** | Recursively deletes a folder and all its contents. |
-| **list_files** | Lists all files and directories in the current path. |
-| **search_file** | Checks if a specific file exists. |
-| **get_file_size** | Returns the file size converted to GB. |
-| **summarize_project** | Lists the first 30 files to give the agent an overview of the directory. |
-| **create_zip_folder** | Compresses a target folder into a `.zip` archive. |
+| **append_doc** | Appends additional text to the end of an existing file. Useful for logs, notes, or journals. |
+| **rename_file** | Renames a specific file while keeping it in the same location. |
+| **move_file** | Moves a file from a source directory to a destination directory. |
+| **copy_file** | Creates a copy of a file while preserving metadata. |
+| **remove_file** | Permanently deletes a specific file from the system. |
+| **remove_folder** | Recursively deletes a folder along with all its contents. |
+| **list_files** | Lists all files and directories in the current working directory. |
+| **search_file** | Checks if a specific file exists within the directory structure. |
+| **get_file_size** | Returns the file size converted to **GB**. |
+| **summarize_project** | Lists the first **30 files** in a directory to provide a quick project overview. |
+| **create_zip_folder** | Compresses a folder into a `.zip` archive. |
 
-### 💻 Coding & Shell Execution (`tools/coding_shell_tools.py`)
-Tools designed for developers to automate coding workflows.
+---
 
-| Tool Name | Description |
-| :--- | :--- |
-| **run_python_script** | Executes a `.py` file using the system's Python interpreter. |
-| **run_js_script** | Executes a `.js` file using Node.js. |
-| **install_python_packages** | Runs `pip install <package>` to add dependencies. |
-| **install_node_packages** | Runs `npm install <package>` for Node.js projects. |
-| **execute_terminal_command** | **(High Power)** Executes arbitrary shell commands and captures output. |
-| **print_project_hierarchy** | Uses the `tree` command to visualize folder structure. |
-| **search_web** | Queries DuckDuckGo via API to retrieve real-time information. |
+# 💻 Coding & Shell Execution (`tools/coding_shell_tools.py`)
 
-### 🐙 GitHub Automation (Authenticated) (`tools/github_tools.py`)
-Tools that require a Personal Access Token to manage your repositories.
+Developer-focused tools for automating coding workflows and executing scripts.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **create_github_repo** | Creates a new public or private repository on your account. |
-| **delete_github_repo** | **(Destructive)** Permanently deletes a repository by name. |
+| **run_python_script** | Executes a `.py` file using the system’s Python interpreter. |
+| **run_js_script** | Executes a `.js` file using **Node.js**. |
+| **install_python_packages** | Installs Python dependencies using `pip install <package>`. |
+| **install_node_packages** | Installs Node.js dependencies using `npm install <package>`. |
+| **execute_terminal_command** | ⚠️ **High Power Tool** — Executes arbitrary shell commands and captures the output. |
+| **print_project_hierarchy** | Uses the `tree` command to display a visual representation of the project folder structure. |
+| **search_web** | Queries the DuckDuckGo API to retrieve real-time web information. |
+
+---
+
+# 🐙 GitHub Automation (Authenticated) (`tools/github_tools.py`)
+
+These tools require a **GitHub Personal Access Token** and allow the agent to manage repositories.
+
+| Tool Name | Description |
+| :--- | :--- |
+| **create_github_repo** | Creates a new repository (public or private) in the authenticated GitHub account. |
+| **delete_github_repo** | ⚠️ **Destructive Action** — Permanently deletes a repository by name. |
 | **list_github_repos** | Lists all repositories associated with the authenticated user. |
-| **create_github_file** | Creates a new file inside a specific remote repository. |
-| **delete_github_file** | Removes a file from a remote repository. |
-| **add_folder_to_github** | Adds a folder structure to a repo (via `.gitkeep` or direct file creation). |
+| **create_github_file** | Creates a new file inside a specific GitHub repository. |
+| **delete_github_file** | Removes a file from a remote GitHub repository. |
+| **add_folder_to_github** | Adds a folder structure to a repository (via `.gitkeep` or direct file creation). |
 
-### 🌐 GitHub Data & Media (`tools/general_github_api_tools.py`)
-Public API tools for exploration and data retrieval.
+---
 
-| Tool Name | Description |
-| :--- | :--- |
-| **search_github** | Searches for public repositories based on keywords. |
-| **get_repo_readme** | Fetches and decodes the README.md of any public repo. |
-| **list_repo_files** | Lists the root file structure of any public repo. |
-| **download_github_repo** | Downloads a repo as a ZIP and extracts it to the current folder. |
-| **download_random_image** | Fetches a random image from Lorem Picsum and saves it locally. |
+# 🌐 GitHub Data & Media (`tools/general_github_api_tools.py`)
 
-### 🖥️ System Monitoring (`tools/System_tools.py`)
-Tools for checking the health of the machine running the agent.
+Public API tools used for exploring repositories and retrieving GitHub data.
 
 | Tool Name | Description |
 | :--- | :--- |
-| **get_cpu_RAM_usage** | Returns current CPU % and RAM usage (Total/Used/Free). |
-| **get_os_info** | Returns System, Node Name, Release, Version, and Machine type. |
-| **list_processes** | Lists the top 20 currently running process names. |
+| **search_github** | Searches public GitHub repositories based on keywords. |
+| **get_repo_readme** | Fetches and decodes the `README.md` of any public repository. |
+| **list_repo_files** | Lists the root file structure of any public repository. |
+| **download_github_repo** | Downloads a repository as a ZIP file and extracts it locally. |
+| **download_random_image** | Downloads a random image from **Lorem Picsum** and saves it locally. |
 
-### ☁️ General Utilities (`tools/general_tools.py`)
+---
+
+# 🖥️ System Monitoring (`tools/System_tools.py`)
+
+Tools that allow the agent to monitor system health and machine information.
+
 | Tool Name | Description |
 | :--- | :--- |
-| **get_current_time** | Returns the local system time. |
-| **get_weather** | Fetches current weather for a city via `wttr.in`. |
+| **get_cpu_RAM_usage** | Returns the current CPU usage percentage and RAM statistics (Total, Used, Free). |
+| **get_os_info** | Retrieves operating system details such as System, Node Name, Version, and Machine type. |
+| **list_processes** | Lists the top **20 currently running processes** on the machine. |
 
+---
+
+# ☁️ General Utilities (`tools/general_tools.py`)
+
+Lightweight tools for retrieving common system and internet information.
+
+| Tool Name | Description |
+| :--- | :--- |
+| **get_current_time** | Returns the current local system time. |
+| **get_weather** | Fetches the current weather information for a city using `wttr.in`. |
 ---
 
 ## 🛠️ Installation & Setup
@@ -239,6 +259,3 @@ This agent allows **Arbitrary Code Execution and File System Modification.**
 
 Created by **Sujit Sadalage**
 
-```bash
-pip install langchain langchain-groq langchain-community python-dotenv requests psutil PyGithub
-=
