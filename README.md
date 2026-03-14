@@ -272,10 +272,7 @@ HybridAgenticAI/
 
 ---
 
-## 6️⃣ Future Improvements
-Shows roadmap.
-
-## 🚧 Future Improvements
+##  Future Improvements
 
 Planned enhancements:
 
