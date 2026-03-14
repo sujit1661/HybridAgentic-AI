@@ -270,14 +270,11 @@ HybridAgenticAI/
 ```
 
 
-
-
 ---
 
 ## 6️⃣ Future Improvements
 Shows roadmap.
 
-```markdown
 ## 🚧 Future Improvements
 
 Planned enhancements:
@@ -287,9 +284,8 @@ Planned enhancements:
 - Vector database memory
 - Multi-agent collaboration
 - Automatic debugging agent
-
 ---
----
+'''
 
 # ⚠️ Security Warning
 
