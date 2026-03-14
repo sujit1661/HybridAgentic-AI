@@ -174,42 +174,37 @@ python main.py
 
 
 ---
-
 ## 🧠 Architecture Overview
 
-HybridAgentic AI follows a modular agent architecture built on LangChain.
+HybridAgentic AI follows a **modular agent architecture** built on **LangChain** that connects natural language reasoning with system-level tool execution.
 
+```
 User Input
-   ↓
-   
+   │
+   ▼
 LLM Reasoning (Groq)
-   ↓
-   
+   │
+   ▼
 Tool Selection (LangChain Agent)
-   ↓
-   
+   │
+   ▼
 Tool Execution
-   ↓
-   
+   │
+   ▼
 Result Returned to User
-   ↓
-   
+   │
+   ▼
 Memory Stored (JSON Chat History)
+```
 
-### Key Components
+### Key Flow
 
-- **LLM Layer**
-  - Groq-powered LLM performs reasoning and decides which tool to call.
-
-- **Tool Layer**
-  - Modular Python tools perform system actions.
-
-- **Memory Layer**
-  - Conversation history stored using `FileChatMessageHistory`.
-
-- **Execution Layer**
-  - Shell commands, file operations, and API calls.
-
+1. **User Input** – The user provides a natural language instruction.
+2. **LLM Reasoning** – The Groq-powered LLM analyzes the request.
+3. **Tool Selection** – LangChain determines which tool should be used.
+4. **Tool Execution** – The selected system tool performs the action.
+5. **Result Returned** – The output is sent back to the user.
+6. **Memory Storage** – The conversation is stored in JSON for future context.
   
 ---
 
