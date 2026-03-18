@@ -4,13 +4,13 @@ import requests
 import zipfile
 import io
 import os
-from tool_logger import tool_logger
+from .tool_loggers import tool_logger
 
 
 
 
-@tool_logger
 @tool(description="search github repos")
+@tool_logger
 def search_github(search_term: str = "github") -> str:
     try:
         res=requests.get(f"https://api.github.com/search/repositories?q={search_term}")
@@ -24,8 +24,8 @@ def search_github(search_term: str = "github") -> str:
         return str(e)
 
 
-@tool_logger
 @tool(description="Get README of a GitHub repository")
+@tool_logger
 def get_repo_readme(owner: str, repo: str) -> str:
     try:
         url = f"https://api.github.com/repos/{owner}/{repo}/readme"
@@ -35,8 +35,8 @@ def get_repo_readme(owner: str, repo: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="list all files in github repo from its name and owner name")
+@tool_logger
 def list_repo_files(owner: str, repo: str) -> str:
     try:
         res = requests.get(f"https://api.github.com//repos/{owner}/{repo}/contents").json()
@@ -45,8 +45,8 @@ def list_repo_files(owner: str, repo: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="download github repo from its name owner and repo name and extract it into current working directory")
+@tool_logger
 def download_github_repo(owner: str, repo: str) -> str:
     try:
         res = requests.get(f"https://github.com/{owner}/{repo}/archive/refs/heads/main.zip")
@@ -62,8 +62,8 @@ def download_github_repo(owner: str, repo: str) -> str:
 
 
 
-@tool_logger
 @tool(description="download random images and save it using given name")
+@tool_logger
 def download_random_image_by_name(name: str, width=600, height=400) -> str:
     try:
         url =requests.get(f"https://picsum.photos/{width}/{height}")

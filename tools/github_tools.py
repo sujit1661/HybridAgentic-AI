@@ -1,6 +1,6 @@
 from github import Github,Auth
 from langchain.tools import tool
-from tool_logger import tool_logger
+from .tool_loggers import tool_logger
 
 
 # Personal Access Token
@@ -9,8 +9,8 @@ auth=Auth.Token(token)
 g=Github(auth=auth)
 user=g.get_user()
 
-@tool_logger
 @tool(description="tool will create a repo in github")
+@tool_logger
 def create_github_repo(repo_name: str,private=True) -> str:
     try:
         repo=user.create_repo(name=repo_name, private=private)
@@ -20,8 +20,8 @@ def create_github_repo(repo_name: str,private=True) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="tool will list all the repos in github")
+@tool_logger
 def list_github_repos():
     try:
         repos=[repo.name for repo in user.get_repos()]
@@ -32,8 +32,9 @@ def list_github_repos():
         return str(e)
 
 
-@tool_logger
+
 @tool(description="tool will delete repo from github from its name")
+@tool_logger
 def delete_github_repo(repo_name: str) -> str:
     try:
         repo=user.get_repo(repo_name)
@@ -45,8 +46,8 @@ def delete_github_repo(repo_name: str) -> str:
         print("could not delete repo")
         return str(e)
 
-@tool_logger
 @tool(description="tool will a new file in repo")
+@tool_logger
 def create_github_file(repo_name: str,path, content: str,message) -> str:
     try:
         repo=user.get_repo(repo_name)
@@ -57,8 +58,8 @@ def create_github_file(repo_name: str,path, content: str,message) -> str:
         print("could not create file")
         return str(e)
 
-@tool_logger
 @tool(description="tool will add folder and files to github you have to provide path repo name and message")
+@tool_logger
 def add_folder_and_files_to_github(repo_name: str, path: str, message: str) -> str:
     try:
         repo=user.get_repo(repo_name)
@@ -73,8 +74,8 @@ def add_folder_and_files_to_github(repo_name: str, path: str, message: str) -> s
         print("could not add folder and files")
         return str(e)
 
-@tool_logger
 @tool(description="tool will delete file in the github repo")
+@tool_logger
 def delete_github_file(repo_name: str, path: str, message) -> str:
     try:
         repo=user.get_repo(repo_name)

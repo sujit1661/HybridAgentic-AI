@@ -1,4 +1,5 @@
 import logging
+from functools import wraps  # ✅ ADD THIS
 
 logging.basicConfig(
     filename="agent.log",
@@ -15,6 +16,7 @@ def log_error(message):
 
 
 def tool_logger(tool_func):
+    @wraps(tool_func)  # ✅ THIS FIXES EVERYTHING
     def wrapper(*args, **kwargs):
         try:
             log_info(f"Tool Start: {tool_func.__name__} | Args: {args} | Kwargs: {kwargs}")

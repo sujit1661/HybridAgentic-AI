@@ -1,10 +1,11 @@
 from langchain.tools import tool
 import os
 import shutil
-from tool_logger import tool_logger
+from .tool_loggers import tool_logger
 
-@tool_logger
+
 @tool(description="Create a new empty file. Input should be the file name including extension like notes.txt")
+@tool_logger
 def create_empty_file(filename: str) -> str:
     try:
         with open(filename, "w") as f:
@@ -13,8 +14,8 @@ def create_empty_file(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="create a new empty file with content into it")
+@tool_logger
 def create_file_with_content(filename: str,content:str) -> str:
     try:
         with open(filename, "w") as f:
@@ -26,8 +27,9 @@ def create_file_with_content(filename: str,content:str) -> str:
 
 
 
-@tool_logger
+
 @tool(description="Read and return the contents of a file. Input should be the file name.")
+@tool_logger
 def read_file(filename: str) -> str:
     try:
         with open(filename, "r") as f:
@@ -36,8 +38,8 @@ def read_file(filename: str) -> str:
     except:
         return "File not found or cannot be read"
 
-@tool_logger
 @tool(description="write content to a file. Input should be the file name and the content to be written.")
+@tool_logger
 def write_file(filename: str, content: str) -> str:
     try:
         with open(filename, "w") as f:
@@ -46,8 +48,8 @@ def write_file(filename: str, content: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="Delete a file from the current directory. Input should be the file name.")
+@tool_logger
 def remove_file(filename: str) -> str:
     try:
         if os.path.exists(filename):
@@ -57,8 +59,8 @@ def remove_file(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="Create a folder in the current directory. Input should be the folder name.")
+@tool_logger
 def create_folder(folder_name: str) -> str:
     try:
         os.makedirs(folder_name, exist_ok=True)
@@ -66,8 +68,8 @@ def create_folder(folder_name: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="Delete a folder and all its contents. Input should be the folder name.")
+@tool_logger
 def remove_folder(folder_name: str) -> str:
     try:
         if os.path.exists(folder_name):
@@ -77,8 +79,8 @@ def remove_folder(folder_name: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="List files and folders in a directory")
+@tool_logger
 def list_files(path: str = ".") -> str:
     try:
         files = os.listdir(path)
@@ -88,8 +90,8 @@ def list_files(path: str = ".") -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="Rename a file")
+@tool_logger
 def rename_file(source_file: str, file_to_renamed: str) -> str:
     try:
         os.rename(source_file, file_to_renamed)
@@ -97,8 +99,8 @@ def rename_file(source_file: str, file_to_renamed: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="copy a file")
+@tool_logger
 def copy_file(source_file: str, destination: str) -> str:
     try:
         # move with metadata
@@ -107,8 +109,8 @@ def copy_file(source_file: str, destination: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="move file from one folder to another folder")
+@tool_logger
 def move_file(source_folder: str, destination_folder: str) -> str:
     try:
         shutil.move(source_folder, destination_folder)
@@ -116,8 +118,8 @@ def move_file(source_folder: str, destination_folder: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="search file exist or not")
+@tool_logger
 def search_file(filename: str) -> str:
     try:
         if os.path.exists(filename):
@@ -126,8 +128,8 @@ def search_file(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-@tool_logger
 @tool(description="get the size of file from its name")
+@tool_logger
 def get_file_size(filename: str) -> str:
     try:
         size = os.path.getsize(filename)
@@ -135,8 +137,9 @@ def get_file_size(filename: str) -> str:
         return f"{round(size_gb,3)} GB"
     except Exception as e:
         return str(e)
-@tool_logger
+
 @tool(description="Append content to an existing document")
+@tool_logger
 def append_doc(file_path: str, content: str) -> str:
     try:
         with open(file_path, "a", encoding="utf-8") as f:
@@ -145,14 +148,14 @@ def append_doc(file_path: str, content: str) -> str:
     except Exception as e:
         return f"⚠️ Could not append to file {file_path}. Error: {str(e)}"
 
-@tool_logger
 @tool(description="summarize the current project folder")
+@tool_logger
 def summarize_current_project_folder() -> str:
     files = os.listdir(os.getcwd())
     return f"project contains {len(files)} files:\n"+"\n".join(files[:30])
 
-@tool_logger
 @tool(description="tool will create a zip of project folder")
+@tool_logger
 def create_zip_folder(project_folder: str) -> str:
     try:
         shutil.make_archive(project_folder, "zip", project_folder)
