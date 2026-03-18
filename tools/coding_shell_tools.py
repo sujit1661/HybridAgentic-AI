@@ -1,7 +1,9 @@
 import subprocess
 from langchain.tools import tool
 import requests
+from tool_logger import tool_logger
 
+@tool_logger
 @tool(description="install packages for python. user need to provide correct package name.")
 def install_python_packages(package_name: str) -> str:
     try:
@@ -10,7 +12,7 @@ def install_python_packages(package_name: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="install packages for node. user need to provide correct package name.")
 def install_node_packages(package_name: str) -> str:
     try:
@@ -19,7 +21,7 @@ def install_node_packages(package_name: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="run any .py file.")
 def run_python_script(filename: str) -> str:
     try:
@@ -28,7 +30,7 @@ def run_python_script(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="run any .js file.")
 def run_js_script(filename: str) -> str:
     try:

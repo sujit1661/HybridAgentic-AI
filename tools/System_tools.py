@@ -1,7 +1,9 @@
 from langchain.tools import tool
 import psutil, platform
+from tool_logger import tool_logger
 
 
+@tool_logger
 @tool(description="used to display the cpu as well as RAM usages")
 def get_cpu_RAM_usage() -> str:
     cpu= psutil.cpu_percent(interval=1)
@@ -14,7 +16,7 @@ def get_cpu_RAM_usage() -> str:
             f"Used RAM: {round(used,2)}")
 
 
-
+@tool_logger
 @tool(description="get info about os")
 def get_os_info():
     return {"system" :platform.system(),
@@ -24,7 +26,7 @@ def get_os_info():
             "processor" :platform.processor()
             }
 
-
+@tool_logger
 @tool(description="used to list currently running processes.By default return first 20 processes")
 def list_processes():
     processes = []

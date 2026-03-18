@@ -1,13 +1,14 @@
 from langchain.tools import tool
 import requests
 import datetime
+from tool_logger import tool_logger
 
-
+@tool_logger
 @tool(description="Get the current system time. Use when the user asks for the current time.")
 def get_current_time() -> str:
     return datetime.datetime.now().strftime("%I:%M %p")
 
-
+@tool_logger
 @tool(description="Get current weather for a given city. Input should be a city name.")
 def get_weather(city: str) -> str:
     try:

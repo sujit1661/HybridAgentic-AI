@@ -1,8 +1,9 @@
 from langchain.tools import tool
 import os
 import shutil
+from tool_logger import tool_logger
 
-
+@tool_logger
 @tool(description="Create a new empty file. Input should be the file name including extension like notes.txt")
 def create_empty_file(filename: str) -> str:
     try:
@@ -12,7 +13,7 @@ def create_empty_file(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="create a new empty file with content into it")
 def create_file_with_content(filename: str,content:str) -> str:
     try:
@@ -25,7 +26,7 @@ def create_file_with_content(filename: str,content:str) -> str:
 
 
 
-
+@tool_logger
 @tool(description="Read and return the contents of a file. Input should be the file name.")
 def read_file(filename: str) -> str:
     try:
@@ -35,7 +36,7 @@ def read_file(filename: str) -> str:
     except:
         return "File not found or cannot be read"
 
-
+@tool_logger
 @tool(description="write content to a file. Input should be the file name and the content to be written.")
 def write_file(filename: str, content: str) -> str:
     try:
@@ -45,7 +46,7 @@ def write_file(filename: str, content: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="Delete a file from the current directory. Input should be the file name.")
 def remove_file(filename: str) -> str:
     try:
@@ -56,7 +57,7 @@ def remove_file(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="Create a folder in the current directory. Input should be the folder name.")
 def create_folder(folder_name: str) -> str:
     try:
@@ -65,7 +66,7 @@ def create_folder(folder_name: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="Delete a folder and all its contents. Input should be the folder name.")
 def remove_folder(folder_name: str) -> str:
     try:
@@ -76,7 +77,7 @@ def remove_folder(folder_name: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="List files and folders in a directory")
 def list_files(path: str = ".") -> str:
     try:
@@ -87,7 +88,7 @@ def list_files(path: str = ".") -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="Rename a file")
 def rename_file(source_file: str, file_to_renamed: str) -> str:
     try:
@@ -96,7 +97,7 @@ def rename_file(source_file: str, file_to_renamed: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="copy a file")
 def copy_file(source_file: str, destination: str) -> str:
     try:
@@ -106,7 +107,7 @@ def copy_file(source_file: str, destination: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="move file from one folder to another folder")
 def move_file(source_folder: str, destination_folder: str) -> str:
     try:
@@ -115,7 +116,7 @@ def move_file(source_folder: str, destination_folder: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="search file exist or not")
 def search_file(filename: str) -> str:
     try:
@@ -125,7 +126,7 @@ def search_file(filename: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="get the size of file from its name")
 def get_file_size(filename: str) -> str:
     try:
@@ -134,7 +135,7 @@ def get_file_size(filename: str) -> str:
         return f"{round(size_gb,3)} GB"
     except Exception as e:
         return str(e)
-
+@tool_logger
 @tool(description="Append content to an existing document")
 def append_doc(file_path: str, content: str) -> str:
     try:
@@ -144,13 +145,13 @@ def append_doc(file_path: str, content: str) -> str:
     except Exception as e:
         return f"⚠️ Could not append to file {file_path}. Error: {str(e)}"
 
-
+@tool_logger
 @tool(description="summarize the current project folder")
 def summarize_current_project_folder() -> str:
     files = os.listdir(os.getcwd())
     return f"project contains {len(files)} files:\n"+"\n".join(files[:30])
 
-
+@tool_logger
 @tool(description="tool will create a zip of project folder")
 def create_zip_folder(project_folder: str) -> str:
     try:

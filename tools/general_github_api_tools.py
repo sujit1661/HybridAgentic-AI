@@ -4,10 +4,12 @@ import requests
 import zipfile
 import io
 import os
+from tool_logger import tool_logger
 
 
 
 
+@tool_logger
 @tool(description="search github repos")
 def search_github(search_term: str = "github") -> str:
     try:
@@ -22,7 +24,7 @@ def search_github(search_term: str = "github") -> str:
         return str(e)
 
 
-
+@tool_logger
 @tool(description="Get README of a GitHub repository")
 def get_repo_readme(owner: str, repo: str) -> str:
     try:
@@ -33,7 +35,7 @@ def get_repo_readme(owner: str, repo: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="list all files in github repo from its name and owner name")
 def list_repo_files(owner: str, repo: str) -> str:
     try:
@@ -43,7 +45,7 @@ def list_repo_files(owner: str, repo: str) -> str:
     except Exception as e:
         return str(e)
 
-
+@tool_logger
 @tool(description="download github repo from its name owner and repo name and extract it into current working directory")
 def download_github_repo(owner: str, repo: str) -> str:
     try:
@@ -60,8 +62,7 @@ def download_github_repo(owner: str, repo: str) -> str:
 
 
 
-
-
+@tool_logger
 @tool(description="download random images and save it using given name")
 def download_random_image_by_name(name: str, width=600, height=400) -> str:
     try:
