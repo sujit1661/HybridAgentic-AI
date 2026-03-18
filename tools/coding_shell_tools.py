@@ -1,7 +1,8 @@
 import subprocess
 from langchain.tools import tool
 import requests
-from tool_logger import tool_logger
+from ..tool_loggers import tool_logger
+
 
 @tool_logger
 @tool(description="install packages for python. user need to provide correct package name.")
