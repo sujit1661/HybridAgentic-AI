@@ -172,7 +172,6 @@ python main.py
 ```
 
 
-
 ---
 ## 🧠 Architecture Overview
 
@@ -223,6 +222,39 @@ Memory Stored (JSON Chat History)
 
 ---
 
+## 📊 Logging & Observability
+
+The system includes a centralized logging mechanism to track tool execution and errors.
+
+- Logs tool start and completion  
+- Captures input arguments and outputs  
+- Tracks errors for debugging  
+- Logs stored in `agent.log`  
+
+---
+
+## ⚡ FastAPI Integration (API Layer)
+
+The agent supports API-based interaction using FastAPI.
+
+### 🚀 Features
+- REST endpoint for agent queries  
+- Integration with frontend or external apps  
+- Multi-user support  
+
+### 📌 Endpoint
+POST /run-agent
+
+### 📌 Request Body
+```json
+{
+  "query": "Create a folder test and add a file hello.txt"
+}
+```
+
+
+
+---
 ### System Diagnostics
 
 **User**
