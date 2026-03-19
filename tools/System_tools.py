@@ -1,4 +1,4 @@
-from langchain.tools import tool
+from langchain_core.tools import tool
 import psutil, platform
 from .tool_loggers import tool_logger
 

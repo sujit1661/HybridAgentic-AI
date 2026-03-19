@@ -1,5 +1,5 @@
 from github import Github,Auth
-from langchain.tools import tool
+from langchain_core.tools import tool
 from .tool_loggers import tool_logger
 
 

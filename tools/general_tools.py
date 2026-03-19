@@ -1,4 +1,4 @@
-from langchain.tools import tool
+from langchain_core.tools import tool
 import requests
 import datetime
 from .tool_loggers import tool_logger

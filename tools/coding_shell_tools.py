@@ -1,5 +1,5 @@
 import subprocess
-from langchain.tools import tool
+from langchain_core.tools import tool
 import requests
 from .tool_loggers import tool_logger
 

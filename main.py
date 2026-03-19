@@ -7,6 +7,9 @@ from langchain_groq import ChatGroq
 from tools_registry import load_all_tools
 import os
 from AgentLogger import log_info,log_error
+from query_processor import process_query
+
+
 
 load_dotenv()
 
@@ -31,6 +34,7 @@ llm = ChatGroq(
     max_tokens=400,
 )
 
+
 agent = create_agent(
     model=llm,
     tools=load_all_tools(),
@@ -47,18 +51,31 @@ print("\n🤖 AI System Agent Ready")
 print("Type 'exit' to quit\n")
 
 
-
-def run_agent(query: str,session_id: str = "default"):
+def run_agent(query: str, session_id: str = "default"):
     try:
         log_info(f"User Query: {query}")
+        #
+        # Step 1: Process query
+        parsed_query = process_query(query, llm)
+        log_info(f"Parsed Query: {parsed_query}")
 
+        message = f"""
+        User Intent: {parsed_query['intent']}
+        Task: {parsed_query['task']}
+        Entities: {parsed_query['entities']}
+        """
+
+        # Step 3: Send PLAN to agent (NOT raw query)
         response = agent_with_memory.invoke(
-            {"messages": [HumanMessage(content=query)]},
-            config={"configurable": {"session_id": session_id},
-                "recursion_limit": 50 }
+            {"messages": [HumanMessage(content=message)]},   # ✅ KEY CHANGE
+            config={
+                "configurable": {"session_id": session_id},
+                "recursion_limit": 50
+            }
         )
 
-        return response["messages"][-1].content
+        return response["messages"][-1].content and parsed_query
+
     except Exception as e:
         log_error(f"Error: {str(e)}")
         return "Something went wrong"
